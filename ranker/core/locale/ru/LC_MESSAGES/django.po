@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-12 10:31+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: ranker/core/admin.py:8 ranker/core/admin.py:9
+msgid "Ranker Content Management"
+msgstr "Администрирование Ranker"
+
+#: ranker/core/admin.py:10
+msgid "Content Management"
+msgstr "Управление контентом"
+
+#: ranker/core/models.py:13
+#, fuzzy
+#| msgid "Phone Number"
+msgid "phone number"
+msgstr "номер телефона"
+
+#: ranker/core/models.py:30
+msgid "first name"
+msgstr "имя"
+
+#: ranker/core/models.py:31
+msgid "last name"
+msgstr "фамилия"
+
+#: ranker/core/models.py:32
+msgid "username"
+msgstr "имя пользователя"
+
+#: ranker/core/models.py:33
+msgid "date of birth"
+msgstr "дата рождения"
+
+#: ranker/core/models.py:34
+msgid "city"
+msgstr "город"
+
+#: ranker/core/models.py:36
+msgid "equipment"
+msgstr "инвентарь"
+
+#: ranker/core/models.py:48 ranker/core/models.py:166
+msgid "player"
+msgstr "спортсмен"
+
+#: ranker/core/models.py:49
+msgid "players"
+msgstr "спортсмены"
+
+#: ranker/core/models.py:53
+msgid "name"
+msgstr "название"
+
+#: ranker/core/models.py:54
+msgid "short name"
+msgstr "краткое название"
+
+#: ranker/core/models.py:55
+msgid "address"
+msgstr "адрес"
+
+#: ranker/core/models.py:57
+msgid "rating coefficient"
+msgstr "коэффициент значимости"
+
+#: ranker/core/models.py:63
+msgid "coef"
+msgstr "кзс"
+
+#: ranker/core/models.py:69 ranker/core/models.py:76
+msgid "event"
+msgstr "мероприятие"
+
+#: ranker/core/models.py:70
+msgid "events"
+msgstr "мероприятия"
+
+#: ranker/core/models.py:80
+msgid "event date"
+msgstr "дата мероприятия"
+
+#: ranker/core/models.py:84
+msgid "winner"
+msgstr "победитель"
+
+#: ranker/core/models.py:92
+msgid "loser"
+msgstr "проигравший"
+
+#: ranker/core/models.py:98
+msgid "winner score"
+msgstr "сетов у победителя"
+
+#: ranker/core/models.py:101
+msgid "loser score"
+msgstr "сетов у проигравшего"
+
+#: ranker/core/models.py:103
+msgid "winner rating"
+msgstr "рейтинг победителя"
+
+#: ranker/core/models.py:104
+msgid "loser rating"
+msgstr "рейтинг проигравшего"
+
+#: ranker/core/models.py:105
+msgid "rating delta"
+msgstr "дельта"
+
+#: ranker/core/models.py:108
+msgid "technical result"
+msgstr "технический результат"
+
+#: ranker/core/models.py:158
+msgid "match result"
+msgstr "результат матча"
+
+#: ranker/core/models.py:159
+msgid "match results"
+msgstr "результаты матча"
+
+#: ranker/core/models.py:170
+msgid "date"
+msgstr "дата"
+
+#: ranker/core/models.py:178 ranker/core/models.py:179
+msgid "rating history"
+msgstr "история рейтинга"
+
+#: ranker/core/utils/data.py:198
+msgid "Total Matches"
+msgstr "Всего матчей сыграно"
+
+#: ranker/core/utils/data.py:199
+msgid "Total Players"
+msgstr "Всего спортсменов"

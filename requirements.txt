@@ -1,0 +1,5 @@
+Django==2.2.7
+djangorestframework==3.10.3
+pandas==0.25.3
+gunicorn==20.0.4
+whitenoise==4.1.4
