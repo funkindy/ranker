@@ -1,6 +1,6 @@
 <template>
   <v-row dense class="mx-0" style="height: 100%">
-    <v-navigation-drawer app :clipped="true" width="400">
+    <v-navigation-drawer app :clipped="true" width="400" v-model="showSider">
       <player-list @player-clicked="onPlayerClick"/>
     </v-navigation-drawer>
     <v-col> 
@@ -13,11 +13,25 @@
       />
       <v-card v-else>
         <v-card-title primary-title align-center>
-          <v-icon left>mdi-arrow-left-circle-outline</v-icon>
-          <span>Выберите игрока из списка</span>
+          <v-icon left>
+            mdi-arrow-left-circle-outline
+          </v-icon>
+          <span>{{ $t("player_card.placeholder") }}</span>
         </v-card-title>
       </v-card>
     </v-col>
+      <v-btn
+        fab
+        small
+        absolute
+        right
+        bottom
+        color="grey lighten-3"
+        class="v-btn--fab"
+        @click.stop="showSider = !showSider"
+      >
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
   </v-row>
 </template>
 
@@ -32,6 +46,7 @@ export default {
   components: { PlayerCard, PlayerList },
   data() {
     return {
+      showSider: true,
       playerDetails: null,
       playerStats: null,
       ratingHistory: null,
@@ -82,3 +97,10 @@ export default {
   }
 }
 </script>
+
+<style >
+.v-btn--fab {
+  bottom: 0;
+  margin: 0 16px 48px 0;
+}
+</style>

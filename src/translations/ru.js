@@ -20,6 +20,7 @@ export const RUSSIAN_TRANSLATIONS = {
     "city_col": "Город"
   },
   player_card: {
+    "placeholder": "Выберите игрока из списка",
     "name": "Информация об игроке",
     "rating": "Рейтинг",
     "city": "Город",

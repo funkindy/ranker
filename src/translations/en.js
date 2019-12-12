@@ -20,6 +20,7 @@ export const ENGLISH_TRANSLATIONS = {
     "city_col": "City"
   },
   player_card: {
+    "placeholder": "Choose player from the list",
     "name": "Player info",
     "rating": "Rating",
     "city": "City",
