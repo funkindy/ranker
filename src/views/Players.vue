@@ -23,14 +23,15 @@
       <v-btn
         fab
         small
-        absolute
+        fixed
         right
         bottom
-        color="grey lighten-3"
-        class="v-btn--fab"
+        dark
+        color="red"
         @click.stop="showSider = !showSider"
-      >
-        <v-icon>mdi-menu</v-icon>
+      > 
+        <v-icon v-if="showSider">mdi-arrow-left</v-icon>
+        <v-icon v-else>mdi-account-circle</v-icon>
       </v-btn>
   </v-row>
 </template>
@@ -97,10 +98,3 @@ export default {
   }
 }
 </script>
-
-<style >
-.v-btn--fab {
-  bottom: 0;
-  margin: 0 16px 48px 0;
-}
-</style>

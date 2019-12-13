@@ -20,25 +20,27 @@
         {{ item.name }}
       </v-btn>
     </v-toolbar-items>
-    <v-menu class="hidden-md-and-up">
-      <template v-slot:activator="{ on }">
-        <v-btn text v-on="on">
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item v-for="item in menu" :key="item.icon">
-          <v-btn text 
-            :to="item.to"
-            :href="item.href"
-            :target="item.target"
-          >
-            <v-icon :left="true">{{ item.icon }}</v-icon>
-            {{ item.name }}
+    <div class="hidden-md-and-up">
+      <v-menu>
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on">
+            <v-icon>mdi-menu</v-icon>
           </v-btn>
-        </v-list-item>   
-      </v-list>
-    </v-menu>
+        </template>
+        <v-list>
+          <v-list-item v-for="item in menu" :key="item.icon">
+            <v-btn text 
+              :to="item.to"
+              :href="item.href"
+              :target="item.target"
+            >
+              <v-icon :left="true">{{ item.icon }}</v-icon>
+              {{ item.name }}
+            </v-btn>
+          </v-list-item>   
+        </v-list>
+      </v-menu>
+    </div>
   </v-app-bar>
 </template>
 
