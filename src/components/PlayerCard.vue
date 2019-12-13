@@ -5,8 +5,8 @@
     </v-card-title>
     <v-card-text>
       <v-row>
-        <v-col cols="2" class="">
-          <v-avatar size="80">
+        <v-col cols="4" md="2" class="text-center" justify="center">
+          <v-avatar size="60">
             <img
               src="https://eitrawmaterials.eu/wp-content/uploads/2016/09/empty-avatar.jpg"
             >
@@ -16,7 +16,7 @@
             <v-icon class="red--text text--lighten-1">mdi-star-circle-outline</v-icon>
             <span
             style="vertical-align:middle"
-            class="font-weight-bold blue--text subtitle-1">
+            class="font-weight-bold blue--text subtitle-2">
               {{ playerDetails.rating }}
             </span>
           </div>
@@ -30,10 +30,11 @@
       </v-row>
       <v-divider></v-divider>
       <v-row>
-        <v-col>
+        <v-col style="overflow: auto">
           <v-tabs 
             color="blue lighten-1"
-            :vertical="true"
+            :vertical="false"
+            grow
           >
             <v-tab :title="$t('player_card.info.name')"><v-icon>mdi-chart-bubble</v-icon></v-tab>
             <v-tab :title="$t('player_card.chart.name')"><v-icon>mdi-chart-areaspline</v-icon></v-tab>

@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     onPlayerClick(player_id) {
-      this.$router.push(`/players/${player_id}`)
+      this.$router.push(`/players/${player_id}`).catch(err => {})
     },
     fetchPlayerData(player_id) {
       axios.get(`/api/v1/player/details/${player_id}`).then((response) => {

@@ -6,52 +6,55 @@
     </v-subheader>
     <v-list flat dense>
       <v-list-item-group>
-        <v-list-item
+        <v-row dense
+          align="center" justify="center"
           v-for="(leader, index) in leaders"
           :key="leader.id"
           @click="playerClick(leader.id)"
         >
-          <v-list-item-avatar>
-            #{{ index + 1 }}
-          </v-list-item-avatar>
-          <v-list-item-avatar color="grey">
-          </v-list-item-avatar>
-          <v-list-item-content class="ml-3">
-            <v-list-item-title>{{ leader.name }}</v-list-item-title>
-            <v-list-item-subtitle>{{ leader.city }}</v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-content>
-            <v-list-item-title class="subtitle-1">
-              <v-chip
-                class="ma-2"
-                title="Рейтинг"
-                :color="getPlaceBgColor(index + 1)"
-                :text-color="getPlaceColor(index + 1)"
-              >
-                <v-icon v-if="index + 1 <= 3" dense>
-                  mdi-star
-                </v-icon>
-                  {{ leader.rating | round(2) }}
-              </v-chip>
-            </v-list-item-title>
-          </v-list-item-content>
-          <v-sheet
-          title="Тренд рейтинга"
-          elevation="1"
-          width="160px">
-            <v-sparkline
-              :value="leader.rating_trend"
-              :smooth="25"
-              :padding="8"
-              :gradient="gradient"
-              :line-width="4"
-              :auto-line-width="true"
-              :auto-draw-duration="1000"
-              :auto-draw="true"
-              :fill="false"
-            ></v-sparkline>
-          </v-sheet>
-        </v-list-item>
+          <v-col cols="12" md="9">
+            <v-list-item>
+              #{{ index + 1 }}
+              <v-list-item-avatar  color="grey" class="ml-2 mr-0">
+              </v-list-item-avatar>
+              <v-list-item-content class="ml-2 text-center">
+                <v-list-item-title>{{ leader.name }}</v-list-item-title>
+                <v-list-item-subtitle>{{ leader.city }}</v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-content class="subtitle-1 text-center">
+                <v-list-item-title>
+                  <v-chip
+                    title="Рейтинг"
+                    :color="getPlaceBgColor(index + 1)"
+                    :text-color="getPlaceColor(index + 1)"
+                  >
+                    <v-icon v-if="index + 1 <= 3" dense>
+                      mdi-star
+                    </v-icon>
+                      {{ leader.rating | round(2) }}
+                  </v-chip>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-col>
+          <v-col cols="8" md="3" class="pr-4">
+            <v-sheet
+            title="Тренд рейтинга"
+            elevation="0">
+              <v-sparkline
+                :value="leader.rating_trend"
+                :smooth="25"
+                :padding="8"
+                :gradient="gradient"
+                :line-width="4"
+                :auto-line-width="true"
+                :auto-draw-duration="1000"
+                :auto-draw="true"
+                :fill="false"
+              ></v-sparkline>
+            </v-sheet>
+          </v-col>
+        </v-row>
       </v-list-item-group>
     </v-list>
   </v-card>
@@ -66,7 +69,8 @@ export default {
   data() {
     return {
       // gradient: ['#f72047', '#ffd200', '#1feaea'],
-      gradient: ['#00C853', '#ffd200', '#D50000'],
+      // gradient: ['#00C853', '#ffd200', '#D50000'],
+      gradient: ['#f72047', '#ffd200', '#1feaea'],
       placeColor: {
         1: "#fee001",
         2: "#A7A7AD",
