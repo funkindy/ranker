@@ -9,26 +9,57 @@
 
     <v-spacer></v-spacer>
 
-    <v-toolbar-items>
-      <v-btn text to="/">
-        <v-icon :left="true">mdi-home-outline</v-icon>
-        {{ $t("nav.main") }}
-      </v-btn>
-      <v-btn text to="/players">
-        <v-icon :left="true">mdi-account</v-icon>
-        {{ $t("nav.players") }}
-      </v-btn>
-      <!-- Put your own link and link locale -->
-      <v-btn text href="https://tv.ittf.com/" target="_blank">
-        <v-icon :left="true">mdi-link</v-icon>
-        {{ $t("nav.link") }}
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn text v-for="item in menu"
+        :key="item.icon"
+        :to="item.to"
+        :href="item.href"
+        :target="item.target"
+      >
+        <v-icon :left="true">{{ item.icon }}</v-icon>
+        {{ item.name }}
       </v-btn>
     </v-toolbar-items>
+    <div class="hidden-md-and-up">
+      <v-menu>
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on">
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="item in menu" :key="item.icon">
+            <v-btn text 
+              :to="item.to"
+              :href="item.href"
+              :target="item.target"
+            >
+              <v-icon :left="true">{{ item.icon }}</v-icon>
+              {{ item.name }}
+            </v-btn>
+          </v-list-item>   
+        </v-list>
+      </v-menu>
+    </div>
   </v-app-bar>
 </template>
 
 <script>
-export default { };
+export default {
+  data() {
+    return {
+      menu: [
+        {name: this.$t("nav.main"), icon: "mdi-home-outline", to: "/"},
+        {name: this.$t("nav.players"), icon: "mdi-account", to: "/players"},
+        {
+          name: this.$t("nav.link"),
+          icon: "mdi-link",
+          href: "https://tv.ittf.com/",
+          target: "_blank"}
+      ]
+    }
+  }
+};
 </script>
 
 <style scoped>

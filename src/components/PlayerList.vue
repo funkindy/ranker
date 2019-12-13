@@ -15,26 +15,29 @@
         ></v-text-field>
 
         <v-data-table
-        height="inherit"
-        :headers="playersColumns"
-        :items="players"
-        item-key="id"
-        :dense="true"
-        :items-per-page="20"
-        :fixed-header="false"
-        :must-sort="true"
-        sortBy="rating"
-        :sort-desc="true"
-        :search="playersSearch"
-        :footer-props="{
-            itemsPerPageOptions: [20],
-            showFirstLastPage: false
-        }"
-        @click:row="onRowClicked"
+          height="inherit"
+          :headers="playersColumns"
+          :items="players"
+          item-key="id"
+          :dense="true"
+          :items-per-page="20"
+          :fixed-header="false"
+          :must-sort="true"
+          sortBy="rating"
+          :sort-desc="true"
+          :search="playersSearch"
+          :footer-props="{
+              itemsPerPageOptions: [20],
+              showFirstLastPage: false
+          }"
         >
-        <template v-slot:item.fullname="{ item }">
-            <b>{{ item.last_name }} {{ item.first_name }}</b>
-        </template>
+          <template v-slot:item="{ item }">
+            <tr @click="onRowClicked(item)" :class="{'blue lighten-3': item.id === selectedId}">
+              <td class="text-start"><b>{{ item.full_name }}</b></td>
+              <td class="text-start">{{ item.rating }}</td>
+              <td class="text-start">{{ item.city }}</td>
+            </tr>
+          </template>
         </v-data-table>
     </v-card-text>
   </v-card>
@@ -52,12 +55,14 @@ export default {
         {text: this.$t("players_list.rating_col"), value: 'rating', width: 100},
         {text: this.$t("players_list.city_col"), value: 'city', width: 80}
       ],
-      playersSearch: null
+      playersSearch: null,
+      selectedId: -1
     }
   },
   methods: {
-    onRowClicked(event) {
-      this.$emit('player-clicked', event.id)
+    onRowClicked(row) {
+      this.selectedId = row.id
+      this.$emit('player-clicked', row.id)
     }
   },
   created() {
