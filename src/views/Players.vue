@@ -59,6 +59,9 @@ export default {
       this.$router.push(`/players/${player_id}`).catch(err => {})
     },
     fetchPlayerData(player_id) {
+
+      this.$store.commit('ALTER_LOADING_STATE', true)
+      
       axios.get(`/api/v1/player/details/${player_id}`).then((response) => {
         this.playerDetails = response.data
       })
@@ -73,7 +76,10 @@ export default {
 
       axios.get(`/api/v1/history/match/${player_id}`).then((response) => {
         this.matchHistory = response.data
+        this.$store.commit('ALTER_LOADING_STATE', false)
       })
+
+
     },
     resetPlayerData() {
       this.playerDetails = null

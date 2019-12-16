@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
@@ -16,7 +17,6 @@ import roundFilter from '@/filters/roundFilter'
 import VueI18n from 'vue-i18n';
 import { ENGLISH_TRANSLATIONS } from './translations/en';
 import { RUSSIAN_TRANSLATIONS } from './translations/ru';
-
 
 Vue.config.productionTip = false
 
@@ -39,9 +39,9 @@ const i18n = new VueI18n({
   messages: TRANSLATIONS,
 })
 
-
 new Vue({
   router,
+  store,
   i18n,
   vuetify: new Vuetify({
     lang: {

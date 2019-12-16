@@ -19,3 +19,10 @@ export default {
   }
 };
 </script>
+
+<style>
+/* Padding is not needed as we use progress-bar in tolbar extension */
+.v-toolbar__extension {
+  padding: 0px !important;
+}
+</style>

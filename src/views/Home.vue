@@ -81,12 +81,19 @@ export default {
     }
   },
   created() {
+
+    this.$store.commit('ALTER_LOADING_STATE', true)
+
     axios.get('/api/v1/players/leaderboard').then((response) => {
       this.weekly = response.data.weekly
       this.leaders = response.data.leaders
       this.maxes = response.data.maxes
       this.totals = response.data.totals
+
+      this.$store.commit('ALTER_LOADING_STATE', false)
     })
+
+
   }
 };
 </script>

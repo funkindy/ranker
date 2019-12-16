@@ -1,5 +1,12 @@
 <template>
-  <v-app-bar :elevation="2" dense app :clipped-left="true">
+  <v-app-bar
+    dense
+    app
+    extended
+    extension-height="0"
+    :elevation="2"
+    :clipped-left="true"
+  >
     <img
       style="max-width: 32px; max-height: 32px"
       class="mr-3"
@@ -41,6 +48,11 @@
         </v-list>
       </v-menu>
     </div>
+    <v-progress-linear
+      :active="$store.state.isLoading"
+      :indeterminate="true"
+      class="ma-0"
+      slot="extension" />
   </v-app-bar>
 </template>
 
