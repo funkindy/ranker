@@ -4,7 +4,7 @@
       <v-row>
         <v-col
           class="pt-0"
-          v-for="total in totals"
+          v-for="total in $store.state.lb.totals"
           :key="total.id"
         >
           <BigNumberCard :total="total" />
@@ -13,7 +13,7 @@
 
       <LeadersCard
         :title="$t('leaderboard.top')"
-        :leaders="leaders"
+        :leaders="$store.state.lb.leaders"
       />
       
     </v-col>
@@ -21,7 +21,7 @@
       <SimpleCard
         icon="mdi-thumb-up"
         :title="$t('leaderboard.most_games')"
-        :content="maxes.games"
+        :content="$store.state.lb.maxes.games"
         valueClass="green--text text--accent-4"
         cardClass="mb-3"
       />
@@ -29,7 +29,7 @@
       <SimpleCard
         icon="mdi-thumb-up"
         :title="$t('leaderboard.winrate')"
-        :content="maxes.winrate"
+        :content="$store.state.lb.maxes.winrate"
         valueFilter="percent"
         valueClass="green--text text--accent-4"
         cardClass="mb-3"
@@ -38,7 +38,7 @@
       <SimpleCard
         icon="mdi-thumb-up"
         :title="$t('leaderboard.effective')"
-        :content="maxes.efficiency"
+        :content="$store.state.lb.maxes.efficiency"
         valueClass="green--text text--accent-4"
       />
     </v-col>
@@ -46,7 +46,7 @@
       <SimpleCard
         icon="mdi-thumb-up"
         :title="$t('leaderboard.rise')"
-        :content="weekly.best"
+        :content="$store.state.lb.weekly.best"
         valueClass="green--text text--accent-4"
         cardClass="mb-3"
         dense
@@ -54,7 +54,7 @@
       <SimpleCard 
         icon="mdi-thumb-down"
         :title="$t('leaderboard.fall')"
-        :content="weekly.worst"
+        :content="$store.state.lb.weekly.worst"
         valueClass="red--text text--accent-4"
         dense
       />
@@ -72,28 +72,8 @@ import BigNumberCard from '../components/leaderboard/BigNumberCard'
 export default {
   name: "home",
   components: { SimpleCard, LeadersCard, BigNumberCard },
-  data() {
-    return {
-      leaders: [],
-      weekly: {},
-      maxes: [],
-      totals: []
-    }
-  },
   created() {
-
-    this.$store.commit('ALTER_LOADING_STATE', true)
-
-    axios.get('/api/v1/players/leaderboard').then((response) => {
-      this.weekly = response.data.weekly
-      this.leaders = response.data.leaders
-      this.maxes = response.data.maxes
-      this.totals = response.data.totals
-
-      this.$store.commit('ALTER_LOADING_STATE', false)
-    })
-
-
+    this.$store.dispatch('fetchLeaderboard')
   }
-};
+}
 </script>

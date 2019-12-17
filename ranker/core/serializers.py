@@ -10,6 +10,7 @@ class PlayerSerializer(serializers.ModelSerializer):
         max_digits=10,
         decimal_places=2
     )
+
     class Meta:
         model = Player
         fields = '__all__'
@@ -20,6 +21,7 @@ class RatingHistorySerializer(serializers.ModelSerializer):
         max_digits=10,
         decimal_places=2
     )
+
     class Meta:
         model = RatingHistory
         exclude = ['id', 'player']

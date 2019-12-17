@@ -1,5 +1,3 @@
-import os
-
 from django.urls import path
 
 from ranker.core import views

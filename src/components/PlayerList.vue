@@ -16,8 +16,8 @@
 
         <v-data-table
           height="inherit"
-          :headers="playersColumns"
-          :items="players"
+          :headers="$store.state.player.list.columns"
+          :items="$store.state.player.list.content"
           item-key="id"
           :dense="true"
           :items-per-page="20"
@@ -32,7 +32,8 @@
           }"
         >
           <template v-slot:item="{ item }">
-            <tr @click="onRowClicked(item)" :class="{'blue lighten-3': item.id === selectedId}">
+            <tr @click="onRowClicked(item)"
+            :class="{'blue lighten-3': item.id === $store.state.player.list.selectedId}">
               <td class="text-start"><b>{{ item.full_name }}</b></td>
               <td class="text-start">{{ item.rating }}</td>
               <td class="text-start">{{ item.city }}</td>
@@ -44,31 +45,20 @@
 </template>
 
 <script>
-import axios from "axios"
-
 export default {
   data() {
     return {
-      players: [],
-      playersColumns: [
-        {text: this.$t("players_list.name_col"), value: "full_name", width: 180},
-        {text: this.$t("players_list.rating_col"), value: 'rating', width: 100},
-        {text: this.$t("players_list.city_col"), value: 'city', width: 80}
-      ],
-      playersSearch: null,
-      selectedId: -1
+      playersSearch: null
     }
   },
   methods: {
     onRowClicked(row) {
-      this.selectedId = row.id
+      this.$store.commit('SET_SELECTED_ID', row.id)
       this.$emit('player-clicked', row.id)
     }
   },
   created() {
-    axios.get('/api/v1/players/all').then((response) => {
-      this.players = response.data
-    })
+    this.$store.dispatch('fetchPlayers')
   }
 }
 </script>

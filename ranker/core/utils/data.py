@@ -1,5 +1,3 @@
-import datetime
-
 import pandas as pd
 
 from django.db.models import IntegerField, CharField, F, Value
@@ -29,7 +27,7 @@ def get_last_matches(player_id, n_matches):
         )
     )
 
-    losses = Match.objects.filter(loser_id=player_id).values(    
+    losses = Match.objects.filter(loser_id=player_id).values(
         'id', 'event_date', 'delta',
         event_short_name=F('event__short_name'),
         opponent_name=Concat('winner__first_name', Value(' '), 'winner__last_name'),
@@ -66,7 +64,7 @@ def get_player_stats(player_id):
     stats['total_games'] = stats['win_count'] + stats['lose_count']
     stats['best_rating'] = best_rating
 
-    # TODO: best/worst opponent, events frequency, 
+    # TODO: best/worst opponent, events frequency,
     # achievemets (medal places) and more
 
     return stats
@@ -85,9 +83,9 @@ def get_changes_in_time(n_players=5, n_days=7, fmt="%Y-%m-%d"):
 
     qs = RatingHistory.objects.raw(
         f"""
-            SELECT 
-                p1.id, 
-                p1.player_id, 
+            SELECT
+                p1.id,
+                p1.player_id,
                 p3.last_name || " " || p3.first_name as full_name,
                 p3.rating - p1.rating as rating_delta
             FROM ratinghistory p1, (
@@ -113,10 +111,11 @@ def get_changes_in_time(n_players=5, n_days=7, fmt="%Y-%m-%d"):
         for i in qs
     ]
 
-    return  {
+    return {
         'best': items[:n_players],
         'worst': reversed(items[-n_players:])
     }
+
 
 def get_leaders(n_players=5, rating_trend_days=7):
     """
@@ -152,14 +151,14 @@ def get_leaders(n_players=5, rating_trend_days=7):
                 'city': leader.city,
                 'rating_trend': latest_leader_ratings.get(leader.id, [])
             }
-            
+
             result.append(leader_dict)
 
     return result
 
 
 def get_maxes():
-    
+
     if not Match.objects.exists():
         return dict()
 
@@ -178,7 +177,7 @@ def get_maxes():
     ]
 
     result = {}
-    
+
     for metric, data in metrics:
         idx = data.idxmax()
         result[metric] = [{
@@ -193,11 +192,10 @@ def get_maxes():
 def get_totals():
     players = Player.objects.count()
     matches = Match.objects.count()
-    
+
     totals = [
         {'id': 'players', 'name': _('Total Matches'), 'value': matches},
         {'id': 'matches', 'name': _('Total Players'), 'value': players}
     ]
 
     return totals
-    

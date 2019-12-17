@@ -24,9 +24,9 @@
               <v-list-item-content class="subtitle-1 text-center">
                 <v-list-item-title>
                   <v-chip
-                    title="Рейтинг"
-                    :color="getPlaceBgColor(index + 1)"
-                    :text-color="getPlaceColor(index + 1)"
+                    :title="$t('player_card.rating')"
+                    :color="getPlaceColor(index + 1, 'white', '35')"
+                    :text-color="getPlaceColor(index + 1, 'black', '')"
                   >
                     <v-icon v-if="index + 1 <= 3" dense>
                       mdi-star
@@ -39,7 +39,7 @@
           </v-col>
           <v-col cols="8" md="3" class="pr-4">
             <v-sheet
-            title="Тренд рейтинга"
+            :title="$t('player_card.chart.name')"
             elevation="0">
               <v-sparkline
                 :value="leader.rating_trend"
@@ -68,8 +68,6 @@ export default {
   },
   data() {
     return {
-      // gradient: ['#f72047', '#ffd200', '#1feaea'],
-      // gradient: ['#00C853', '#ffd200', '#D50000'],
       gradient: ['#f72047', '#ffd200', '#1feaea'],
       placeColor: {
         1: "#fee001",
@@ -79,27 +77,18 @@ export default {
     }
   },
   methods: {
-      playerClick(player_id) {
-        let url = `/players/${player_id}`
-        window.open(url, '_blank')
-        // To open same window:
-        // this.$router.push(url)
-      },
-      getPlaceBgColor(place) {
-        let color = "white"
-        let alpha = 35
-        if (place <= 3) {
-          color = `${this.placeColor[place]}${alpha}`
-        } 
-        return color
-      },
-      getPlaceColor(place) {
-        let color = "black"
-        if (place <= 3) {
-          color = this.placeColor[place]
-        } 
-        return color
-      }
+    playerClick(player_id) {
+      let url = `/players/${player_id}`
+      window.open(url, '_blank')
+      // To open same window:
+      // this.$router.push(url)
+    },
+    getPlaceColor(place, color, alpha) {
+      if (place <= 3) {
+        color = `${this.placeColor[place]}${alpha}`
+      } 
+      return color
+    }
   }
 }
 </script>

@@ -12,20 +12,20 @@
             >
           </v-avatar>
           <br>
-          <div :title="`${$t('player_card.rating')} ${playerDetails.rating}`">
+          <div :title="`${$t('player_card.rating')} ${playerInfo.rating}`">
             <v-icon class="red--text text--lighten-1">mdi-star-circle-outline</v-icon>
             <span
             style="vertical-align:middle"
             class="font-weight-bold blue--text subtitle-2">
-              {{ playerDetails.rating }}
+              {{ playerInfo.rating }}
             </span>
           </div>
         </v-col>
         <v-col class="body-2 font-weight-light">
           <p class="headline mb-1">{{ fullname }}</p>
-          <span class="font-weight-bold">{{ $t("player_card.city") }}:</span> {{ playerDetails.city }}<br>
+          <span class="font-weight-bold">{{ $t("player_card.city") }}:</span> {{ playerInfo.city }}<br>
           <v-spacer></v-spacer>
-          <span class="font-weight-bold">{{ $t("player_card.date_of_birth") }}:</span>  {{ playerDetails.date_of_birth | date }}
+          <span class="font-weight-bold">{{ $t("player_card.date_of_birth") }}:</span>  {{ playerInfo.date_of_birth | date }}
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -71,7 +71,7 @@
             <v-tab-item class="pa-2">
               <p class="overline">{{ $t('player_card.history.name') }}</p>
               <v-data-table
-                :headers="matchHistoryColumns"
+                :headers="$store.state.player.details.matchHistoryColumns"
                 :items="matchHistory"
                 :dense="true"
                 :items-per-page="10"
@@ -103,27 +103,13 @@ import LineChart from "@/components/LineChart"
 export default {
   components: { LineChart },
   props: {
-    playerDetails: Object,
+    playerInfo: Object,
     playerStats: Object,
     ratingHistory: Array,
     matchHistory: Array
   },
   data() {
     return {
-      matchHistoryColumns: [
-        // {text: "id", value: "id"},
-        {text: this.$t('player_card.history.cols.event_date'), value: "event_date", width: "10%"},
-        {text: this.$t('player_card.history.cols.event_short_name'), value: "event_short_name", width: "10%"},
-        {text: this.$t('player_card.history.cols.score'), value: "score", width: "4%"},
-        {text: this.$t('player_card.history.cols.rating'), value: "rating", width: "2%"},
-        {text: this.$t('player_card.history.cols.opponent_name'), value: "opponent_name", width: "10%"},
-        {text: this.$t('player_card.history.cols.opponent_rating'), value: "opponent_rating", width: "1%"},
-        {text: this.$t('player_card.history.cols.delta'), value: "delta", width: "1%"}
-      ],
-      hands: {
-        R: this.$t('player_card.info.hand_right'),
-        L: this.$t('player_card.info.hand_left')
-      },
       chartOptions: {
         legend: {
           display: false
@@ -149,7 +135,7 @@ export default {
   },
   computed: {
     fullname () {
-      return `${this.playerDetails.first_name} ${this.playerDetails.last_name}`
+      return `${this.playerInfo.first_name} ${this.playerInfo.last_name}`
     },
     statItems () {
       return [
@@ -170,17 +156,17 @@ export default {
         {
           icon: "mdi-account-outline",
           title: this.$t('player_card.info.username'),
-          subtitle: this.playerDetails.username
+          subtitle: this.playerInfo.username
         },
         {
           icon: "mdi-hand",
           title: this.$t('player_card.info.hand'),
-          subtitle: this.hands[this.playerDetails.hand]
+          subtitle: this.$store.state.hands[this.playerInfo.hand]
         },
         {
           icon: "mdi-rocket",
           title: this.$t('player_card.info.equipment'),
-          subtitle: this.playerDetails.equipment
+          subtitle: this.playerInfo.equipment
         }
       ]
 

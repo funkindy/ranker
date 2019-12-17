@@ -19,7 +19,7 @@ DEMO_FIRST_NAMES = [
 
 DEMO_LAST_NAMES = [
     'Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller',
-    'Wilson', 'Moore', 'Taylor',  'Anderson', 'Thomas',
+    'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas',
     'Jackson', 'White', 'Harris', 'Martin', 'Thompson', 'Garcia',
     'Martinez', 'Robinson', 'Clark', 'Rodriguez', 'Lewis', 'Lee',
     'Walker', 'Hall', 'Allen', 'Young', 'Hernandez', 'King',

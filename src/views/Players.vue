@@ -5,11 +5,12 @@
     </v-navigation-drawer>
     <v-col> 
       <player-card
-        v-if="playerDetails"
-        :playerDetails="playerDetails"
-        :playerStats="playerStats"
-        :ratingHistory="ratingHistory"
-        :matchHistory="matchHistory"
+        v-if="$store.state.player.details.playerInfo"
+        :playerInfo="$store.state.player.details.playerInfo"
+        :playerStats="$store.state.player.details.playerStats"
+        :ratingHistory="$store.state.player.details.ratingHistory"
+        :matchHistory="$store.state.player.details.matchHistory"
+
       />
       <v-card v-else>
         <v-card-title primary-title align-center>
@@ -37,8 +38,6 @@
 </template>
 
 <script>
-import axios from "axios"
-
 import PlayerList from "../components/PlayerList"
 import PlayerCard from "../components/PlayerCard"
 
@@ -47,51 +46,21 @@ export default {
   components: { PlayerCard, PlayerList },
   data() {
     return {
-      showSider: true,
-      playerDetails: null,
-      playerStats: null,
-      ratingHistory: null,
-      matchHistory: null
+      showSider: true
     }
   },
   methods: {
     onPlayerClick(player_id) {
       this.$router.push(`/players/${player_id}`).catch(err => {})
     },
-    fetchPlayerData(player_id) {
-
-      this.$store.commit('ALTER_LOADING_STATE', true)
-      
-      axios.get(`/api/v1/player/details/${player_id}`).then((response) => {
-        this.playerDetails = response.data
-      })
-
-      axios.get(`/api/v1/player/stats/${player_id}`).then((response) => {
-        this.playerStats = response.data
-      })
-
-      axios.get(`/api/v1/history/rating/${player_id}`).then((response) => {
-        this.ratingHistory = response.data
-      })
-
-      axios.get(`/api/v1/history/match/${player_id}`).then((response) => {
-        this.matchHistory = response.data
-        this.$store.commit('ALTER_LOADING_STATE', false)
-      })
-
-
-    },
     resetPlayerData() {
-      this.playerDetails = null
-      this.playerStats = null
-      this.ratingHistory = null
-      this.matchHistory = null
+      this.$store.dispatch('resetPlayerDetails')
     }
   },
   watch: {
     '$route' (to, from) {
       if (to.params.id) {
-        this.fetchPlayerData(to.params.id)
+        this.$store.dispatch('fetchPlayerDetails', to.params.id)
       } else {
         this.resetPlayerData()
       }
@@ -99,7 +68,7 @@ export default {
   },
   created() {
     if (this.$route.params.id) {
-      this.fetchPlayerData(this.$route.params.id)
+      this.$store.dispatch('fetchPlayerDetails', this.$route.params.id)
     }
   }
 }

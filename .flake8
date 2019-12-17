@@ -1,0 +1,13 @@
+[flake8]
+ignore = D203
+max-line-length = 120
+exclude =
+    .git,
+    __pycache__,
+    docs/source/conf.py,
+    old,
+    build,
+    dist,
+    ranker/core/migrations/*
+    ranker/settings/*
+max-complexity = 10

@@ -7,22 +7,22 @@ import Players from './views/Players.vue'
 Vue.use(Router)
 
 const router = new Router({
-    mode: 'history',
-    // base: process.env.BASE_URL,
-    routes: [
-      {
-        path: '/',
-        name: 'home', 
-        meta: {layout: 'main-layout'},
-        component: Home
-      },
-      {
-        path: '/players/:id?',
-        name: 'players',
-        meta: {layout: 'main-layout'},
-        component: Players
-      }
-    ]
-  })
+  mode: 'history',
+  // base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/',
+      name: 'home', 
+      meta: {layout: 'main-layout'},
+      component: Home
+    },
+    {
+      path: '/players/:id?',
+      name: 'players',
+      meta: {layout: 'main-layout'},
+      component: Players
+    }
+  ]
+})
 
-  export default router
+export default router
