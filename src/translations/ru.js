@@ -1,4 +1,5 @@
 export const RUSSIAN_TRANSLATIONS = {
+  notFound: "Страница не найдена",
   leaderboard: {
     "top": "Сильнейшие",
     "most_games": "Больше всего игр",
@@ -20,6 +21,7 @@ export const RUSSIAN_TRANSLATIONS = {
     "city_col": "Город"
   },
   player_card: {
+    "notFound": "Игрок не найден",
     "placeholder": "Выберите игрока из списка",
     "name": "Информация об игроке",
     "rating": "Рейтинг",

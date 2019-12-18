@@ -1,4 +1,5 @@
 export const ENGLISH_TRANSLATIONS = {
+  notFound: "Page Not Found",
   leaderboard: {
     "top": "Top players",
     "most_games": "Most games",
@@ -20,6 +21,7 @@ export const ENGLISH_TRANSLATIONS = {
     "city_col": "City"
   },
   player_card: {
+    "notFound": "Player Not Found",
     "placeholder": "Choose player from the list",
     "name": "Player info",
     "rating": "Rating",

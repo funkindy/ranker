@@ -8,10 +8,12 @@
 
 <script>
 import MainLayout from "@/layouts/MainLayout";
+import EmptyLayout from "@/layouts/EmptyLayout";
+
 
 export default {
   name: "app",
-  components: { MainLayout },
+  components: { MainLayout, EmptyLayout },
   computed: {
     layout() {
       return this.$route.meta.layout;

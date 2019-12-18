@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import i18n from './i18n';
 import axios from "axios"
+import i18n from './i18n'
 
 Vue.use(Vuex)
 
@@ -23,6 +23,7 @@ export default new Vuex.Store({
         ]
       },
       details: {
+        notFound: false,
         playerInfo: null,
         playerStats: null,
         ratingHistory: null,
@@ -68,6 +69,12 @@ export default new Vuex.Store({
     SET_SELECTED_ID(state, selectedId) {
       state.player.list.selectedId = selectedId
     },
+    SET_PLAYER_NOT_FOUND(state) {
+      state.player.details.notFound = true
+    },
+    SET_PLAYER_FOUND(state) {
+      state.player.details.notFound = false
+    },
     SET_PLAYER_INFO(state, playerInfo) {
       state.player.details.playerInfo = playerInfo
     },
@@ -100,27 +107,50 @@ export default new Vuex.Store({
       })
     },
     fetchPlayerDetails(context, player_id) {
-      
+
+      if (typeof player_id === "undefined") {
+        // if we at players page just reset the find status
+        context.commit('SET_PLAYER_FOUND')
+        return
+      }
+
+      if (isNaN(player_id)) {
+        // If not a nuber somehow provided
+        context.dispatch('resetPlayerDetails')
+        context.commit('SET_PLAYER_NOT_FOUND')
+        return
+      }
+
       context.commit('SET_LOADING_STATUS', true)
       
       axios.get(`/api/v1/player/details/${player_id}`).then((response) => {
+
+        context.commit('SET_PLAYER_FOUND')
         context.commit('SET_PLAYER_INFO', response.data)
-      })
 
-      axios.get(`/api/v1/player/stats/${player_id}`).then((response) => {
-        context.commit('SET_PLAYER_STATS', response.data)
-      })
+        // fetch other data if player is found
+        axios.get(`/api/v1/player/stats/${player_id}`).then((response) => {
+          context.commit('SET_PLAYER_STATS', response.data)
+        })
+  
+        axios.get(`/api/v1/history/rating/${player_id}`).then((response) => {
+          context.commit('SET_PLAYER_RATING_HISTORY', response.data)
+        })
+  
+        axios.get(`/api/v1/history/match/${player_id}`).then((response) => {
+          context.commit('SET_PLAYER_MATCH_HISTORY', response.data)
+          context.commit('SET_LOADING_STATUS', false)
+        })
 
-      axios.get(`/api/v1/history/rating/${player_id}`).then((response) => {
-        context.commit('SET_PLAYER_RATING_HISTORY', response.data)
-      })
-
-      axios.get(`/api/v1/history/match/${player_id}`).then((response) => {
-        context.commit('SET_PLAYER_MATCH_HISTORY', response.data)
+      }).catch(() => {
+        // If Django tells there is no such player
+        context.dispatch('resetPlayerDetails')
+        context.commit('SET_PLAYER_NOT_FOUND')
         context.commit('SET_LOADING_STATUS', false)
       })
     },
     resetPlayerDetails(context) {
+      context.commit('SET_PLAYER_FOUND')
       context.commit('SET_PLAYER_INFO', null)
       context.commit('SET_PLAYER_STATS', null)
       context.commit('SET_PLAYER_RATING_HISTORY', null)

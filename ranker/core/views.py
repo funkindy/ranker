@@ -3,6 +3,7 @@ from django.views.decorators.cache import cache_page
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 
 from ranker.core.models import (
     Player, RatingHistory
@@ -33,9 +34,13 @@ class PlayerDetail(APIView):
     Player data
     """
     def get(self, request, player_id):
-        player = Player.objects.get(pk=player_id)
-        serializer = PlayerSerializer(player)
-        return Response(serializer.data)
+        try:
+            player = Player.objects.get(pk=player_id)
+            serializer = PlayerSerializer(player)
+            response = Response(serializer.data)
+        except Player.DoesNotExist:
+            response = Response(status=status.HTTP_404_NOT_FOUND)
+        return response
 
 
 class PlayerRatingHistory(APIView):

@@ -19,6 +19,17 @@
           </v-icon>
           <span>{{ $t("player_card.placeholder") }}</span>
         </v-card-title>
+        <v-card-text
+          align-center
+          v-if="$store.state.player.details.notFound"
+        >
+          <v-icon left class="red--text text--accent-2">
+            mdi-alert-circle-outline
+          </v-icon>
+          <span class="red--text text--accent-2">
+            {{ $t("player_card.notFound") }}
+          </span>
+        </v-card-text>
       </v-card>
     </v-col>
       <v-btn
@@ -52,24 +63,15 @@ export default {
   methods: {
     onPlayerClick(player_id) {
       this.$router.push(`/players/${player_id}`).catch(err => {})
-    },
-    resetPlayerData() {
-      this.$store.dispatch('resetPlayerDetails')
     }
   },
   watch: {
     '$route' (to, from) {
-      if (to.params.id) {
-        this.$store.dispatch('fetchPlayerDetails', to.params.id)
-      } else {
-        this.resetPlayerData()
-      }
+      this.$store.dispatch('fetchPlayerDetails', to.params.id)
     }
   },
   created() {
-    if (this.$route.params.id) {
-      this.$store.dispatch('fetchPlayerDetails', this.$route.params.id)
-    }
+    this.$store.dispatch('fetchPlayerDetails', this.$route.params.id)
   }
 }
 </script>
