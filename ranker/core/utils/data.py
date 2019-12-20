@@ -1,3 +1,5 @@
+import datetime
+
 import pandas as pd
 
 from django.db.models import IntegerField, CharField, F, Value
@@ -199,3 +201,29 @@ def get_totals():
     ]
 
     return totals
+
+
+def get_event_details(event_id, days=60):
+    matches = pd.DataFrame(
+        Match.objects
+        .filter(
+            event_id=event_id,
+            event_date__gte=timezone.now() - datetime.timedelta(days=days)
+        )
+        .values()
+    )
+
+    avg_rating = matches.winner_rating.mean()
+
+    # +1 for the last place player (as he loses all matches)
+    avg_players = (
+        matches.groupby('event_date')
+        .apply(lambda x: x.winner_id.nunique() + 1)
+        .mean()
+    )
+
+    return {
+        'event_id': event_id,
+        'avg_rating': avg_rating,
+        'avg_players': avg_players
+    }

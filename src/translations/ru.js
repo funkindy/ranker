@@ -11,6 +11,7 @@ export const RUSSIAN_TRANSLATIONS = {
   nav: {
     "main": "Главная",
     "players": "Игроки",
+    "events": "События",
     "link": "ITTF"
   },
   players_list: {
@@ -52,5 +53,14 @@ export const RUSSIAN_TRANSLATIONS = {
         "delta": "Дельта"
       }
     }
+  },
+  event: {
+    "coef": "КЗС"
+  },
+  event_card: {
+    placeholder: "Выберите событие из списка",
+    title: "Информация о событии",
+    avg_rating: "Средний рейтинг участников",
+    avg_players: "Среднее количество участников"
   }
 }

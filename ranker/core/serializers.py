@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 
-from ranker.core.models import Player, Match, RatingHistory
+from ranker.core.models import Player, Event, Match, RatingHistory
 
 
 class PlayerSerializer(serializers.ModelSerializer):
@@ -13,6 +13,13 @@ class PlayerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Player
+        fields = '__all__'
+
+
+class EventSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Event
         fields = '__all__'
 
 

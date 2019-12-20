@@ -11,6 +11,7 @@ export const ENGLISH_TRANSLATIONS = {
   nav: {
     "main": "Home",
     "players": "Players",
+    "events": "Events",
     "link": "ITTF"
   },
   players_list: {
@@ -52,5 +53,14 @@ export const ENGLISH_TRANSLATIONS = {
         "delta": "Delta"
       }
     }
+  },
+  event: {
+    "coef": "Rating Coef."
+  },
+  event_card: {
+    placeholder: "Choose event from the list",
+    title: "Event Info",
+    avg_rating: "Average Player Rating",
+    avg_players: "Average Player Count"
   }
 }

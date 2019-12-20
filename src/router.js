@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from './views/Home.vue'
 import Players from './views/Players.vue'
+import Events from './views/Events.vue'
 import NotFound from './views/NotFound.vue'
 
 Vue.use(Router)
@@ -22,6 +23,12 @@ const router = new Router({
       name: 'players',
       meta: {layout: 'main-layout'},
       component: Players
+    },
+    {
+      path: '/events/:id?',
+      name: 'events',
+      meta: {layout: 'main-layout'},
+      component: Events
     },
     { path: '/404', meta: {layout: 'empty-layout'}, component: NotFound},
     { path: '*', redirect: '/404' }

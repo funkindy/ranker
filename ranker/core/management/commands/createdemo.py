@@ -58,25 +58,39 @@ class Command(BaseCommand):
         random.seed(1337)
 
         with transaction.atomic():
-            event = self.create_event()
+            events = self.create_events()
             players = self.create_players()
-            self.create_matches(event, players)
+            self.create_matches(events, players)
 
         self.clear_cache('leaderboard')
 
         print('Done.')
 
-    def create_event(self):
-        """Create demo event"""
-        print('Creating event...')
+    def create_events(self,):
+        """Create demo events"""
+        print(f'Creating events...')
 
-        event = Event.objects.create(
-            name='Everyday games',
-            short_name='Everyday games',
-            address='Somewhere',
-            coefficient=0.6
-        )
-        return event
+        events = {
+            'regular': {
+                'name': 'Regular Office Battles',
+                'short_name': 'Office Games',
+                'address': 'Office',
+                'coefficient': 0.6
+            },
+            'special': {
+                'name': 'Friday Tournament',
+                'short_name': 'Friday Clash',
+                'address': 'Office',
+                'coefficient': 1.0
+            }
+        }
+
+        result = {}
+
+        for name, meta in events.items():
+            result[name] = Event.objects.create(**meta)
+
+        return result
 
     def create_players(self):
         """Create some random players"""
@@ -112,7 +126,7 @@ class Command(BaseCommand):
 
         return players
 
-    def create_matches(self, event, players):
+    def create_matches(self, events, players):
         """Create some random match results for the past two months"""
         print('Creating random matches...')
 
@@ -120,11 +134,18 @@ class Command(BaseCommand):
         players = list(Player.objects.all())
 
         for day in range(DEMO_N_PLAY_DAYS):
+            play_day = start_date + datetime.timedelta(days=day)
+
+            if play_day.strftime('%A') == 'Friday':
+                event = events['special']
+            else:
+                event = events['regular']
+
             for _ in range(DEMO_MATCHES_PER_DAY):
                 winner, loser = random.sample(players, k=2)
                 match = Match(
                     event=event,
-                    event_date=start_date + datetime.timedelta(days=day),
+                    event_date=play_day,
                     winner=winner,
                     loser=loser,
                     winner_score=1,

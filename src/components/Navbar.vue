@@ -63,6 +63,7 @@ export default {
       menu: [
         {name: this.$t("nav.main"), icon: "mdi-home-outline", to: "/"},
         {name: this.$t("nav.players"), icon: "mdi-account", to: "/players"},
+        {name: this.$t("nav.events"), icon: "mdi-bank", to: "/events"},
         {
           name: this.$t("nav.link"),
           icon: "mdi-link",

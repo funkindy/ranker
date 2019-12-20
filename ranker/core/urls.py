@@ -8,5 +8,7 @@ urlpatterns = [
     path('player/details/<int:player_id>', views.PlayerDetail.as_view()),
     path('player/stats/<int:player_id>', views.PlayerStats.as_view()),
     path('history/rating/<int:player_id>', views.PlayerRatingHistory.as_view()),
-    path('history/match/<int:player_id>', views.PlayerMatchHistory.as_view())
+    path('history/match/<int:player_id>', views.PlayerMatchHistory.as_view()),
+    path('events/all', views.EventList.as_view()),
+    path('event/details/<int:event_id>', views.EventDetail.as_view())
 ]

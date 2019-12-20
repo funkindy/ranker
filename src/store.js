@@ -12,6 +12,12 @@ export default new Vuex.Store({
       R: i18n.t('player_card.info.hand_right'),
       L: i18n.t('player_card.info.hand_left')
     },
+    lb: {
+      leaders: [],
+      weekly: {},
+      maxes: [],
+      totals: []
+    },
     player: {
       list: {
         selectedId: -1,
@@ -40,11 +46,13 @@ export default new Vuex.Store({
         ]
       }
     },
-    lb: {
-      leaders: [],
-      weekly: {},
-      maxes: [],
-      totals: []
+    event: {
+      list: {
+        content: []
+      },
+      details: {
+        info: {}
+      }
     }
   },
   mutations: {
@@ -63,8 +71,8 @@ export default new Vuex.Store({
     SET_LOADING_STATUS(state, isLoading) {
       state.isLoading = isLoading
     },
-    SET_PLAYER_LIST(state, player_list) {
-      state.player.list.content = player_list
+    SET_PLAYER_LIST(state, playerList) {
+      state.player.list.content = playerList
     },
     SET_SELECTED_ID(state, selectedId) {
       state.player.list.selectedId = selectedId
@@ -86,6 +94,12 @@ export default new Vuex.Store({
     },
     SET_PLAYER_MATCH_HISTORY(state, matchHistory) {
       state.player.details.matchHistory = matchHistory
+    },
+    SET_EVENTS_LIST(state, eventsList) {
+      state.event.list.content = eventsList
+    },
+    SET_EVENT_DETAILS(state, eventInfo) {
+      state.event.details.info = eventInfo
     }
   },
   actions: {
@@ -155,6 +169,20 @@ export default new Vuex.Store({
       context.commit('SET_PLAYER_STATS', null)
       context.commit('SET_PLAYER_RATING_HISTORY', null)
       context.commit('SET_PLAYER_MATCH_HISTORY', null)
+    },
+    fetchEvents(context) {
+      context.commit('SET_LOADING_STATUS', true)
+      axios.get('/api/v1/events/all').then((response) => {
+        context.commit('SET_EVENTS_LIST', response.data)
+        context.commit('SET_LOADING_STATUS', false)
+      })
+    },
+    fetchEventDetails(context, event_id) {
+      context.commit('SET_LOADING_STATUS', true)
+      axios.get(`/api/v1/event/details/${event_id}`).then((response) => {
+        context.commit('SET_EVENT_DETAILS', response.data)
+        context.commit('SET_LOADING_STATUS', false)
+      })
     }
   }
 })

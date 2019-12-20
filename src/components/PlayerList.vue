@@ -10,6 +10,7 @@
         append-icon="mdi-account-search-outline"
         :label="$t('players_list.search')"
         dense
+        outlined
         single-line
         hide-details
         ></v-text-field>
