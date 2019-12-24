@@ -57,10 +57,18 @@ export const RUSSIAN_TRANSLATIONS = {
   event: {
     "coef": "КЗС"
   },
+  events_list: {
+    name: "События",
+    search: "Найти событие",
+    not_found: "События не найдены"
+  },
   event_card: {
     placeholder: "Выберите событие из списка",
     title: "Информация о событии",
-    avg_rating: "Средний рейтинг участников",
-    avg_players: "Среднее количество участников"
+    total_events: "Всего проведено",
+    avg_rating: "Средний рейтинг",
+    avg_players: "Средняя посещаемость",
+    recent_events: "Последние",
+    players_count: "Количество участников"
   }
 }

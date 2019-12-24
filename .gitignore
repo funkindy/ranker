@@ -3,7 +3,7 @@ env
 .env
 .ipynb_checkpoints
 .code
-# db.sqlite3
+db.sqlite3
 *.pyc
 *.ipynb
 
@@ -31,4 +31,3 @@ yarn-error.log*
 
 # Other. Comment `dist` for environments without nodejs to use prebuilt frontend
 dist
-reset_sqlite.sh

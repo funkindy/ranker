@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     onRowClicked(row) {
-      this.$store.commit('SET_SELECTED_ID', row.id)
+      this.$store.commit('SET_SELECTED_PLAYER_ID', row.id)
       this.$emit('player-clicked', row.id)
     }
   },

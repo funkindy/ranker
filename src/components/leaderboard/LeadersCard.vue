@@ -14,25 +14,27 @@
         >
           <v-col cols="12" md="9">
             <v-list-item>
-              #{{ index + 1 }}
+              <v-list-item-avatar>
+                #{{ index + 1 }}
+              </v-list-item-avatar>
               <v-list-item-avatar  color="grey" class="ml-2 mr-0">
               </v-list-item-avatar>
               <v-list-item-content class="ml-2 text-center">
-                <v-list-item-title>{{ leader.name }}</v-list-item-title>
+                <v-list-item-title>
+                   <v-icon
+                    dense
+                    v-if="index + 1 <= 3"
+                    :class="$store.state.placeClasses[index + 1]"
+                  >
+                      mdi-star-circle
+                  </v-icon>
+                  {{ leader.name }}
+                </v-list-item-title>
                 <v-list-item-subtitle>{{ leader.city }}</v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-content class="subtitle-1 text-center">
-                <v-list-item-title>
-                  <v-chip
-                    :title="$t('player_card.rating')"
-                    :color="getPlaceColor(index + 1, 'white', '35')"
-                    :text-color="getPlaceColor(index + 1, 'black', '')"
-                  >
-                    <v-icon v-if="index + 1 <= 3" dense>
-                      mdi-star
-                    </v-icon>
-                      {{ leader.rating | round(2) }}
-                  </v-chip>
+                <v-list-item-title :title="$t('player_card.rating')">
+                  {{ leader.rating | round(2) }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -68,26 +70,13 @@ export default {
   },
   data() {
     return {
-      gradient: ['#f72047', '#ffd200', '#1feaea'],
-      placeColor: {
-        1: "#fee001",
-        2: "#A7A7AD",
-        3: "#824A02"
-      }
+      gradient: ['#f72047', '#ffd200', '#1feaea']
     }
   },
   methods: {
     playerClick(player_id) {
       let url = `/players/${player_id}`
       window.open(url, '_blank')
-      // To open same window:
-      // this.$router.push(url)
-    },
-    getPlaceColor(place, color, alpha) {
-      if (place <= 3) {
-        color = `${this.placeColor[place]}${alpha}`
-      } 
-      return color
     }
   }
 }

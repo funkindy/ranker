@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 10:31+0500\n"
+"POT-Creation-Date: 2019-12-23 11:15+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ranker/core/admin.py:8 ranker/core/admin.py:9
+#: ranker/core/admin.py:7 ranker/core/admin.py:8
 msgid "Ranker Content Management"
 msgstr "Администрирование Ranker"
 
-#: ranker/core/admin.py:10
+#: ranker/core/admin.py:9
 msgid "Content Management"
 msgstr "Управление контентом"
 
@@ -34,8 +34,18 @@ msgstr "Управление контентом"
 msgid "phone number"
 msgstr "номер телефона"
 
+#: ranker/core/models.py:26
+msgid "Right"
+msgstr "Правая"
+
+#: ranker/core/models.py:27
+msgid "Left"
+msgstr "Левая"
+
 #: ranker/core/models.py:30
-msgid "first name"
+#, fuzzy
+#| msgid "first name"
+msgid "first Name"
 msgstr "имя"
 
 #: ranker/core/models.py:31
@@ -58,7 +68,7 @@ msgstr "город"
 msgid "equipment"
 msgstr "инвентарь"
 
-#: ranker/core/models.py:48 ranker/core/models.py:166
+#: ranker/core/models.py:48 ranker/core/models.py:175
 msgid "player"
 msgstr "спортсмен"
 
@@ -86,7 +96,7 @@ msgstr "коэффициент значимости"
 msgid "coef"
 msgstr "кзс"
 
-#: ranker/core/models.py:69 ranker/core/models.py:76
+#: ranker/core/models.py:69 ranker/core/models.py:85
 msgid "event"
 msgstr "мероприятие"
 
@@ -94,62 +104,70 @@ msgstr "мероприятие"
 msgid "events"
 msgstr "мероприятия"
 
+#: ranker/core/models.py:79
+msgid "Final"
+msgstr "Финал"
+
 #: ranker/core/models.py:80
+msgid "Third Place Match"
+msgstr "Матч за третье место"
+
+#: ranker/core/models.py:89
 msgid "event date"
 msgstr "дата мероприятия"
 
-#: ranker/core/models.py:84
+#: ranker/core/models.py:94
 msgid "winner"
 msgstr "победитель"
 
-#: ranker/core/models.py:92
+#: ranker/core/models.py:102
 msgid "loser"
 msgstr "проигравший"
 
-#: ranker/core/models.py:98
+#: ranker/core/models.py:108
 msgid "winner score"
 msgstr "сетов у победителя"
 
-#: ranker/core/models.py:101
+#: ranker/core/models.py:111
 msgid "loser score"
 msgstr "сетов у проигравшего"
 
-#: ranker/core/models.py:103
+#: ranker/core/models.py:113
 msgid "winner rating"
 msgstr "рейтинг победителя"
 
-#: ranker/core/models.py:104
+#: ranker/core/models.py:114
 msgid "loser rating"
 msgstr "рейтинг проигравшего"
 
-#: ranker/core/models.py:105
+#: ranker/core/models.py:115
 msgid "rating delta"
 msgstr "дельта"
 
-#: ranker/core/models.py:108
+#: ranker/core/models.py:118
 msgid "technical result"
 msgstr "технический результат"
 
-#: ranker/core/models.py:158
+#: ranker/core/models.py:167
 msgid "match result"
 msgstr "результат матча"
 
-#: ranker/core/models.py:159
+#: ranker/core/models.py:168
 msgid "match results"
 msgstr "результаты матча"
 
-#: ranker/core/models.py:170
+#: ranker/core/models.py:179
 msgid "date"
 msgstr "дата"
 
-#: ranker/core/models.py:178 ranker/core/models.py:179
+#: ranker/core/models.py:187 ranker/core/models.py:188
 msgid "rating history"
 msgstr "история рейтинга"
 
-#: ranker/core/utils/data.py:198
+#: ranker/core/utils/data.py:199
 msgid "Total Matches"
 msgstr "Всего матчей сыграно"
 
-#: ranker/core/utils/data.py:199
+#: ranker/core/utils/data.py:200
 msgid "Total Players"
 msgstr "Всего спортсменов"

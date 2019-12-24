@@ -47,6 +47,7 @@ def get_last_matches(player_id, n_matches):
 
 
 def get_player_stats(player_id):
+
     stats = {}
 
     wins = Match.objects.filter(winner_id=player_id)
@@ -192,6 +193,7 @@ def get_maxes():
 
 
 def get_totals():
+
     players = Player.objects.count()
     matches = Match.objects.count()
 
@@ -203,27 +205,75 @@ def get_totals():
     return totals
 
 
-def get_event_details(event_id, days=60):
-    matches = pd.DataFrame(
+def get_event_details(event_id, days=365, n_events=5):
+
+    all_matches = (
         Match.objects
-        .filter(
-            event_id=event_id,
-            event_date__gte=timezone.now() - datetime.timedelta(days=days)
+        .select_related('winner')
+        .select_related('loser')
+        .filter(event_id=event_id)
+    )
+
+    start_date = timezone.now() - datetime.timedelta(days=days)
+
+    matches = (
+        all_matches
+        .filter(event_date__gte=start_date)
+        .order_by('-event_date', 'id')
+    )
+
+    # Get recent events, their stats and winners
+    places = {}
+
+    for match in matches:
+
+        if match.event_phase is None:
+            continue
+
+        places.setdefault(match.event_date, [])
+
+        places[match.event_date].append({
+            'id': match.winner_id,
+            'place': match.event_phase,
+            'name': match.winner.full_name,
+            'rating': match.winner_rating
+        })
+
+        if match.event_phase < 3:  # We dont need loser of third place match in the leaderboard
+            places[match.event_date].append({
+                'id': match.loser_id,
+                'place': match.event_phase + 1,  # +1 as it lost
+                'name': match.loser.full_name,
+                'rating': match.loser_rating
+            })
+
+    # Sorting by place
+    for date, meta in places.items():
+        places[date] = sorted(meta, key=lambda k: k['place'])
+
+    # Getting only last n_events events
+    # +1 for the last place player (as he loses all the matches)
+    recent_events = (
+        pd.DataFrame(matches.values())
+        .groupby('event_date')
+        .agg(
+            players_count=('winner_id', lambda x: x.nunique() + 1),
+            avg_rating=('winner_rating', 'mean')
         )
-        .values()
+        .sort_index(ascending=False)
+        .head(n_events)
     )
+    recent_events['places'] = recent_events.index.map(places)
 
-    avg_rating = matches.winner_rating.mean()
-
-    # +1 for the last place player (as he loses all matches)
-    avg_players = (
-        matches.groupby('event_date')
-        .apply(lambda x: x.winner_id.nunique() + 1)
-        .mean()
-    )
+    # Overall event statistics
+    total_events = all_matches.values('event_date').distinct().count()
+    avg_rating = recent_events.avg_rating.mean()
+    avg_players = recent_events.players_count.mean()
 
     return {
         'event_id': event_id,
+        'total_events': total_events,
         'avg_rating': avg_rating,
-        'avg_players': avg_players
+        'avg_players': avg_players,
+        'recent': recent_events.reset_index().to_dict(orient='records')
     }

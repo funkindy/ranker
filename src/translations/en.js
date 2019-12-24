@@ -16,7 +16,7 @@ export const ENGLISH_TRANSLATIONS = {
   },
   players_list: {
     "name": "Players",
-    "search": "Find player",
+    "search": "Find Player",
     "name_col": "Name",
     "rating_col": "Rating",
     "city_col": "City"
@@ -57,10 +57,18 @@ export const ENGLISH_TRANSLATIONS = {
   event: {
     "coef": "Rating Coef."
   },
+  events_list: {
+    name: "Events",
+    search: "Find Event",
+    not_found: "Events Not Found"
+  },
   event_card: {
     placeholder: "Choose event from the list",
     title: "Event Info",
+    total_events: "Total Event Count",
     avg_rating: "Average Player Rating",
-    avg_players: "Average Player Count"
+    avg_players: "Average Player Count",
+    recent_events: "Recent",
+    players_count: "Player Count"
   }
 }

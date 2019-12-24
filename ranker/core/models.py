@@ -23,8 +23,8 @@ class Player(models.Model):
     LEFT_HAND = 'L'
 
     MAIN_HAND_CHOICES = [
-        (RIGHT_HAND, 'Right'),
-        (LEFT_HAND, 'Left')
+        (RIGHT_HAND, _('Right')),
+        (LEFT_HAND, _('Left'))
     ]
 
     first_name = models.CharField(verbose_name=_('first Name'), max_length=20, null=False)
@@ -41,7 +41,7 @@ class Player(models.Model):
         return '{0} {1}'.format(self.last_name, self.first_name)
 
     def __str__(self):
-        return self.full_name
+        return '{0} ({1})'.format(self.full_name, self.rating)
 
     class Meta:
         db_table = 'player'
@@ -71,6 +71,16 @@ class Event(models.Model):
 
 
 class Match(models.Model):
+
+    # Codes are winner places
+    FINAL = 1
+    THIRD_PLACE = 3
+
+    EVENT_PHASE_CHOICES = [
+        (FINAL, _('Final')),
+        (THIRD_PLACE, _('Third Place Match'))
+    ]
+
     event = models.ForeignKey(
         'Event',
         verbose_name=_('event'),
@@ -78,6 +88,7 @@ class Match(models.Model):
         on_delete=models.CASCADE
     )
     event_date = models.DateField(verbose_name=_('event date'), null=False)
+    event_phase = models.IntegerField(choices=EVENT_PHASE_CHOICES, null=True, blank=True)
     winner = models.ForeignKey(
         'Player',
         db_index=True,

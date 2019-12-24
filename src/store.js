@@ -12,6 +12,11 @@ export default new Vuex.Store({
       R: i18n.t('player_card.info.hand_right'),
       L: i18n.t('player_card.info.hand_left')
     },
+    placeClasses: {
+      1: "yellow--text text--accent-4",
+      2: "blue-grey--text text--lighten-4",
+      3: "brown--text text--darken-1"
+    },
     lb: {
       leaders: [],
       weekly: {},
@@ -48,6 +53,7 @@ export default new Vuex.Store({
     },
     event: {
       list: {
+        selectedId: -1,
         content: []
       },
       details: {
@@ -74,7 +80,7 @@ export default new Vuex.Store({
     SET_PLAYER_LIST(state, playerList) {
       state.player.list.content = playerList
     },
-    SET_SELECTED_ID(state, selectedId) {
+    SET_SELECTED_PLAYER_ID(state, selectedId) {
       state.player.list.selectedId = selectedId
     },
     SET_PLAYER_NOT_FOUND(state) {
@@ -97,6 +103,9 @@ export default new Vuex.Store({
     },
     SET_EVENTS_LIST(state, eventsList) {
       state.event.list.content = eventsList
+    },
+    SET_SELECTED_EVENT_ID(state, event_id) {
+      state.event.list.selectedId = event_id
     },
     SET_EVENT_DETAILS(state, eventInfo) {
       state.event.details.info = eventInfo

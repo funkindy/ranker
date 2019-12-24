@@ -55,7 +55,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print('Creates demo content.')
 
-        random.seed(1337)
+        random.seed(42)
 
         with transaction.atomic():
             events = self.create_events()
@@ -141,11 +141,21 @@ class Command(BaseCommand):
             else:
                 event = events['regular']
 
-            for _ in range(DEMO_MATCHES_PER_DAY):
+            for n in range(DEMO_MATCHES_PER_DAY):
                 winner, loser = random.sample(players, k=2)
+
+                # last two matches of day are 3rd place and finals
+                if n + 2 == DEMO_MATCHES_PER_DAY:
+                    phase = 3
+                elif n + 1 == DEMO_MATCHES_PER_DAY:
+                    phase = 1
+                else:
+                    phase = None
+
                 match = Match(
                     event=event,
                     event_date=play_day,
+                    event_phase=phase,
                     winner=winner,
                     loser=loser,
                     winner_score=1,
