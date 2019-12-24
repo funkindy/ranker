@@ -20,11 +20,9 @@ App is available in two languages: English and Russian.
 
 #### Tech Notes
 
-Provided for maximum portability:
+* Ranker uses Postgresql as database engine. All necessary migration files are included.
 
-* For now Ranker uses sqlite3 as database engine. All necessary migration files are included. Postresql migration is planned soon.
-
-* Django i18n compiled file `.mo` is included in the repo. Dont forget to recompile it with `$ ./manage.py compilemessages` if updating translations.
+* (provided for portability) Django i18n compiled file `.mo` is included in the repo. Dont forget to recompile it with `$ ./manage.py compilemessages` if updating translations.
 
 ##### Local installation steps:
 
@@ -32,7 +30,8 @@ Provided for maximum portability:
 2. Create virtual environment and install packages with `$ pip install -r requirements.txt`
 3. Install node.js
 4. Build assets with `$ npm run build`
-5. Migrate the database:
+5. Create Postgresql database, change database name and user/password in [settings](/ranker/settings/dev.py) if needed. All defaults are `ranker`
+6. Migrate the database:
 
 ```
 $ ./manage.py migrate
@@ -41,8 +40,8 @@ $ ./manage.py createcachetable  # caching is enabled for leaderboard
 $ ./manage.py createdemo  # to load demo data
 ```
 
-6. Use `$ ./manage.py runserver` or deploy with 3rd party web server
-7. Use superuser account at `/admin` to manage the database content and to save new match results.
+7. Use `$ ./manage.py runserver` or deploy with 3rd party web server
+8. Use superuser account at `/admin` to manage the database content and to save new match results.
 
 ##### Heroku deployment:
 
@@ -54,8 +53,9 @@ $ heroku apps:create your_app_name
 $ heroku git:remote --app your_app_name
 $ heroku buildpacks:add --index 1 heroku/nodejs
 $ heroku buildpacks:add --index 2 heroku/python
+$ heroku addons:create heroku-postgresql:hobby-dev
 $ heroku config:set DJANGO_SETTINGS_MODULE=ranker.settings.prod
-$ heroku config:set DJANGO_SECRET_KEY='production SECRET_KEY value'
+$ heroku config:set RANKER_SECRET_KEY='production SECRET_KEY value'
 
 # superuser section, set values as needed
 $ heroku config:set DJANGO_SUPERUSER_USERNAME=admin

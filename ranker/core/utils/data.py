@@ -75,12 +75,14 @@ def get_player_stats(player_id):
 
 def get_changes_in_time(n_players=5, n_days=7, fmt="%Y-%m-%d"):
     """
-    SQLITE ONLY: Raw query to get rating deltas in time back vs current.
+    POSTGRESQL ONLY: Raw query to get rating deltas in time back vs current.
     default is one week.
 
     For other backends there are more convinient ORM ways to get this
 
     returns n_players best and n_players worst deltas
+
+    TODO: put this to ORM level
     """
     up_to_date = (timezone.now() - timezone.timedelta(days=n_days)).strftime(fmt)
 
@@ -89,15 +91,15 @@ def get_changes_in_time(n_players=5, n_days=7, fmt="%Y-%m-%d"):
             SELECT
                 p1.id,
                 p1.player_id,
-                p3.last_name || " " || p3.first_name as full_name,
+                p3.last_name || ' ' || p3.first_name as full_name,
                 p3.rating - p1.rating as rating_delta
             FROM ratinghistory p1, (
                 SELECT player_id, MAX(date) AS max_date
                 FROM ratinghistory
-                WHERE  date <= date("{up_to_date}")
+                WHERE  date <= '{up_to_date}'::date
                 GROUP BY player_id
             ) AS p2, player as p3
-            WHERE p1.date <= date("{up_to_date}")
+            WHERE p1.date <= '{up_to_date}'::date
             AND p1.player_id = p2.player_id
             AND p1.player_id = p3.id
             AND p1.date = p2.max_date
@@ -122,7 +124,7 @@ def get_changes_in_time(n_players=5, n_days=7, fmt="%Y-%m-%d"):
 
 def get_leaders(n_players=5, rating_trend_days=7):
     """
-    TODO: put this to DB level (SQLite 3.25+ / PostgreSQL)
+    TODO: put this to ORM level (PostgreSQL Window Functions)
     """
     leaders = Player.objects.order_by('-rating')[:n_players]
 

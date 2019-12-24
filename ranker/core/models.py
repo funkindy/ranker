@@ -27,13 +27,13 @@ class Player(models.Model):
         (LEFT_HAND, _('Left'))
     ]
 
-    first_name = models.CharField(verbose_name=_('first Name'), max_length=20, null=False)
-    last_name = models.CharField(verbose_name=_('last name'), max_length=20, null=False)
-    username = models.CharField(verbose_name=_('username'), max_length=20, unique=True)
+    first_name = models.CharField(verbose_name=_('first Name'), max_length=40, null=False)
+    last_name = models.CharField(verbose_name=_('last name'), max_length=40, null=False)
+    username = models.CharField(verbose_name=_('username'), max_length=40, unique=True)
     date_of_birth = models.DateField(verbose_name=_('date of birth'), null=False)
-    city = models.CharField(verbose_name=_('city'), max_length=20, null=False)
+    city = models.CharField(verbose_name=_('city'), max_length=40, null=False)
     hand = models.CharField(max_length=1, choices=MAIN_HAND_CHOICES, default=RIGHT_HAND)
-    equipment = models.TextField(verbose_name=_('equipment'))
+    equipment = models.TextField(verbose_name=_('equipment'), max_length=255)
     rating = models.FloatField(null=False, default=INITIAL_RATING_SCORE)
 
     @property
