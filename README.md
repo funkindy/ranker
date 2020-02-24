@@ -28,7 +28,7 @@ App is available in two languages: English and Russian.
 
 1. Install Python 3.7
 2. Create virtual environment and install packages with `$ pip install -r requirements.txt`
-3. Install node.js
+3. Install node.js and then packages with `$ npm install`
 4. Build assets with `$ npm run build`
 5. Create Postgresql database, change database name and user/password in [settings](/ranker/settings/dev.py) if needed. All defaults are `ranker`
 6. Migrate the database:
