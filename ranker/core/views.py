@@ -81,7 +81,7 @@ class PlayerMatchHistory(APIView):
     Player match history
     """
     def get(self, request, player_id):
-        summary = data.get_last_matches(player_id, N_LAST_MATCHES)
+        summary = data.get_last_matches(player_id=player_id, n_matches=N_LAST_MATCHES)
         serializer = MatchHistorySerializer(summary, many=True)
         return Response(serializer.data)
 
@@ -91,7 +91,7 @@ class PlayerStats(APIView):
     Simple player statistics
     """
     def get(self, request, player_id):
-        stats = data.get_player_stats(player_id)
+        stats = data.get_player_stats(player_id=player_id)
         return Response(stats)
 
 
@@ -111,7 +111,7 @@ class EventDetail(APIView):
     """
     def get(self, response, event_id):
         try:
-            event_details = data.get_event_details(event_id)
+            event_details = data.get_event_details(event_id=event_id)
             response = Response(event_details)
         except Event.DoesNotExist:
             response = Response(status=status.HTTP_404_NOT_FOUND)

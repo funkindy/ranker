@@ -13,7 +13,7 @@ VALUE_WIN = 1
 VALUE_LOSE = 0
 
 
-def get_last_matches(player_id, n_matches):
+def get_last_matches(*, player_id: int, n_matches: int) -> Match:
 
     wins = Match.objects.filter(winner_id=player_id).values(
         'id', 'event_date', 'delta',
@@ -46,7 +46,7 @@ def get_last_matches(player_id, n_matches):
     return summary
 
 
-def get_player_stats(player_id):
+def get_player_stats(*, player_id: int) -> dict:
 
     stats = {}
 
@@ -73,7 +73,7 @@ def get_player_stats(player_id):
     return stats
 
 
-def get_changes_in_time(n_players=5, n_days=7, fmt="%Y-%m-%d"):
+def get_changes_in_time(*, n_players: int = 5, n_days: int = 7, fmt: str = "%Y-%m-%d") -> dict:
     """
     POSTGRESQL ONLY: Raw query to get rating deltas in time back vs current.
     default is one week.
@@ -122,7 +122,7 @@ def get_changes_in_time(n_players=5, n_days=7, fmt="%Y-%m-%d"):
     }
 
 
-def get_leaders(n_players=5, rating_trend_days=7):
+def get_leaders(*, n_players: int = 5, rating_trend_days: int = 7) -> list:
     """
     TODO: put this to ORM level (PostgreSQL Window Functions)
     """
@@ -162,7 +162,7 @@ def get_leaders(n_players=5, rating_trend_days=7):
     return result
 
 
-def get_maxes():
+def get_maxes() -> dict:
 
     if not Match.objects.exists():
         return dict()
@@ -194,7 +194,7 @@ def get_maxes():
     return result
 
 
-def get_totals():
+def get_totals() -> list:
 
     players = Player.objects.count()
     matches = Match.objects.count()
@@ -207,7 +207,7 @@ def get_totals():
     return totals
 
 
-def get_event_details(event_id, days=365, n_events=5):
+def get_event_details(*, event_id: int, days: int = 365, n_events: int = 5) -> dict:
 
     all_matches = (
         Match.objects
