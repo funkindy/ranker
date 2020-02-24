@@ -14,7 +14,7 @@ from ranker.core.serializers import (
     RatingHistorySerializer,
     MatchHistorySerializer
 )
-from ranker.core.utils import data
+from ranker.core.services import data
 
 N_LAST_MATCHES = 10
 N_PLAYERS = 5

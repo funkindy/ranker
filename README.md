@@ -22,7 +22,7 @@ App is available in two languages: English and Russian.
 
 * Ranker uses Postgresql as database engine. All necessary migration files are included.
 
-* (provided for portability) Django i18n compiled file `.mo` is included in the repo. Dont forget to recompile it with `$ ./manage.py compilemessages` if updating translations.
+* (provided for portability) Django i18n compiled file `.mo` is included in the repo. Dont forget to recompile it with `$ ./manage.py compilemessages` if updating translations. `gettext` utility is needed for this (`sudo apt install gettext`).
 
 ##### Local installation steps:
 
@@ -30,7 +30,7 @@ App is available in two languages: English and Russian.
 2. Create virtual environment and install packages with `$ pip install -r requirements.txt`
 3. Install node.js and then packages with `$ npm install`
 4. Build assets with `$ npm run build`
-5. Create Postgresql database, change database name and user/password in [settings](/ranker/settings/dev.py) if needed. All defaults are `ranker`
+5. Create Postgresql database, change database name and user/password in [settings](/ranker/settings/dev.py) if needed. Default value for database, user and password is `ranker`
 6. Migrate the database:
 
 ```

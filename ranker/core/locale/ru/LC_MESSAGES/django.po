@@ -164,10 +164,10 @@ msgstr "дата"
 msgid "rating history"
 msgstr "история рейтинга"
 
-#: ranker/core/utils/data.py:199
+#: ranker/core/services/data.py:199
 msgid "Total Matches"
 msgstr "Всего матчей сыграно"
 
-#: ranker/core/utils/data.py:200
+#: ranker/core/services/data.py:200
 msgid "Total Players"
 msgstr "Всего спортсменов"

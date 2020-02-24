@@ -3,7 +3,7 @@ from django.db import models, transaction
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
-from ranker.core.utils import rating
+from ranker.core.services import rating
 
 DEFAULT_COEF = 0.6
 
