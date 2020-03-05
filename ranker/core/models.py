@@ -124,7 +124,9 @@ class Match(models.Model):
 
             # Get new rating values and delta
             new_winner_rating, new_loser_rating, delta = rating.calculate_new_rating(
-                self.winner.rating, self.loser.rating, self.event.coefficient
+                winner_rating=self.winner.rating,
+                loser_rating=self.loser.rating,
+                coef=self.event.coefficient
             )
 
             # Updating cache fields for match statistics and save match
