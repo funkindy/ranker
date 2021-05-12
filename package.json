@@ -10,7 +10,7 @@
   "dependencies": {
     "@vue/eslint-config-standard": "^5.0.0",
     "axios": "^0.19.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "core-js": "^3.3.2",
     "node-sass": "^4.13.0",
     "scss-loader": "0.0.1",
