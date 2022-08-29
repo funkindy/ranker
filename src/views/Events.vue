@@ -19,9 +19,9 @@
           <v-list three-line>
             <v-list-item-group v-if="filteredEvents.length" color="primary">
               <v-divider />
-              <template v-for="item in filteredEvents">
+              <template v-for="item in filteredEvents"  :key="item.id">
                 <v-list-item
-                  :key="item.id"
+                 
                   @click="onEventClick(item.id)"
                 >
                   <v-list-item-action class="my-auto">
@@ -43,7 +43,7 @@
                   </v-list-item-action>
 
                 </v-list-item>
-                <v-divider :key="item.title"/>
+                <v-divider />
               </template>
             </v-list-item-group>
             <v-list-item class="text-center" v-else>
