@@ -19,9 +19,9 @@
           <v-list three-line>
             <v-list-item-group v-if="filteredEvents.length" color="primary">
               <v-divider />
-              <template v-for="item in filteredEvents"  :key="item.id">
+              <template v-for="item in filteredEvents"  >
                 <v-list-item
-                 
+                 :key="item.id"
                   @click="onEventClick(item.id)"
                 >
                   <v-list-item-action class="my-auto">
