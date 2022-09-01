@@ -168,11 +168,13 @@ def get_maxes() -> dict:
         return dict()
 
     matches = pd.DataFrame(Match.objects.values('winner_id', 'loser_id'))
-    ratings = pd.DataFrame(Player.objects.values('id', 'rating'))
-
-    wins = matches.groupby('winner_id').size()
-    losses = matches.groupby('loser_id').size()
-    ratings = ratings.set_index('id')['rating'] - Player.INITIAL_RATING_SCORE
+    ratings = (
+        pd.DataFrame(Player.objects.values('id', 'rating'))
+        .set_index('id')['rating']
+        - Player.INITIAL_RATING_SCORE
+    )
+    wins = matches.groupby('winner_id').size().reindex(ratings).fillna(0)
+    losses = matches.groupby('loser_id').size().reindex(ratings).fillna(0)
     total = wins + losses
 
     metrics = [
