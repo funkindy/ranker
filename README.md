@@ -26,7 +26,7 @@ App is available in two languages: English and Russian.
 
 ##### Local installation steps:
 
-1. Install Python 3.7
+1. Install Python 3.9
 2. Create virtual environment and install packages with `$ pip install -r requirements.txt`
 3. Install node.js and then packages with `$ npm install`
 4. Build assets with `$ npm run build`
