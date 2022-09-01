@@ -267,6 +267,9 @@ def get_event_details(*, event_id: int, days: int = 365, n_events: int = 5) -> d
     )
     recent_events['places'] = recent_events.index.map(places)
 
+    # Fix for unwanted errors with uncomplete tournament results
+    recent_events = recent_events.dropna(subset=['places'])
+
     # Overall event statistics
     total_events = all_matches.values('event_date').distinct().count()
     avg_rating = recent_events.avg_rating.mean()

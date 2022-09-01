@@ -12,12 +12,12 @@
       </v-row>
 
       <LeadersCard
+        class="mt-2"
         :title="$t('leaderboard.top')"
         :leaders="$store.state.lb.leaders"
       />
-      
     </v-col>
-  <v-col> 
+    <v-col>
       <SimpleCard
         icon="mdi-thumb-up"
         :title="$t('leaderboard.most_games')"
@@ -51,7 +51,7 @@
         cardClass="mb-3"
         dense
       />
-      <SimpleCard 
+      <SimpleCard
         icon="mdi-thumb-down"
         :title="$t('leaderboard.fall')"
         :content="$store.state.lb.weekly.worst"
@@ -63,17 +63,16 @@
 </template>
 
 <script>
-import axios from "axios"
-import SimpleCard from '../components/leaderboard/SimpleCard' 
-import LeadersCard from '../components/leaderboard/LeadersCard' 
-import BigNumberCard from '../components/leaderboard/BigNumberCard' 
-
+import axios from "axios";
+import SimpleCard from "../components/leaderboard/SimpleCard";
+import LeadersCard from "../components/leaderboard/LeadersCard";
+import BigNumberCard from "../components/leaderboard/BigNumberCard";
 
 export default {
   name: "home",
   components: { SimpleCard, LeadersCard, BigNumberCard },
   created() {
-    this.$store.dispatch('fetchLeaderboard')
-  }
-}
+    this.$store.dispatch("fetchLeaderboard");
+  },
+};
 </script>
