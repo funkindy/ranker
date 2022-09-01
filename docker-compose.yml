@@ -1,0 +1,14 @@
+version: "3.2"
+
+services:
+  rk-database:
+    container_name: rk-db
+    image: postgres:14.5-alpine
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+     - POSTGRES_USER=ranker
+     - POSTGRES_PASSWORD=ranker
+    volumes:
+      - ./tmp/postgres:/var/lib/postgresql

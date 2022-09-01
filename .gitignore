@@ -31,3 +31,4 @@ yarn-error.log*
 
 # Other. Comment `dist` for environments without nodejs to use prebuilt frontend
 dist
+ranker/
