@@ -173,8 +173,8 @@ def get_maxes() -> dict:
         .set_index('id')['rating']
         - Player.INITIAL_RATING_SCORE
     )
-    wins = matches.groupby('winner_id').size().reindex(ratings).fillna(0)
-    losses = matches.groupby('loser_id').size().reindex(ratings).fillna(0)
+    wins = matches.groupby('winner_id').size().reindex(ratings.index).fillna(0)
+    losses = matches.groupby('loser_id').size().reindex(ratings.index).fillna(0)
     total = wins + losses
 
     metrics = [
